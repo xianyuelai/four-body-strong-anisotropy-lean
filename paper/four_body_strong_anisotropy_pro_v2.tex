@@ -1,0 +1,780 @@
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+% Initialize the small OT1 text font before it is first used in mathematics.
+\AtBeginDocument{\begingroup\footnotesize\fontencoding{OT1}\selectfont\endgroup}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\numberwithin{equation}{section}
+\newcommand{\R}{\mathbb R}
+\newcommand{\eps}{\varepsilon}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\Id}{Id}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\cV}{\mathcal V}
+\newcommand{\cD}{\mathcal D}
+
+\title[Four-body balanced configurations under strong anisotropy]
+{Four-body balanced configurations under strong anisotropy}
+\date{}
+\subjclass[2020]{70F10, 70F15, 37N05}
+\keywords{Four-body problem, balanced configuration, anisotropy,
+cluster limit, nondegeneracy}
+
+\begin{document}
+\begin{abstract}
+For any four fixed positive masses, we classify all planar balanced
+configurations for $S=\diag(s,1)$ when $s$ is sufficiently large.
+With the multiplier equal to one, labels and axes fixed, and no symmetry
+quotient, there are exactly $192$ solutions: $24$ on each coordinate axis
+and $144$ noncollinear solutions. All are nondegenerate on the
+six-dimensional space with center of mass zero. The solutions are indexed
+by ordered partitions of the labels, with a linear order inside each
+block. Each datum determines a unique local branch whose rescaled
+coordinates are real analytic in $\eps=s^{-1/3}$ at zero. A uniform
+two-scale distance estimate shows that every solution sequence with
+$s\to\infty$ has a subsequence converging in these coordinates to one
+of the prescribed limits. This proves that the branches exhaust all
+solutions for sufficiently large $s$.
+\end{abstract}
+\maketitle
+
+\section{Introduction}\label{sec:introduction}
+
+Fix four masses $m_1,m_2,m_3,m_4>0$. For a collision-free configuration
+$q=(q_1,\ldots,q_4)\in(\R^2)^4$, write $q_i=(x_i,y_i)$ and
+$r_{ij}=|q_i-q_j|$, and set
+\[
+ f_i(q)=\sum_{j\ne i}m_j\frac{q_i-q_j}{r_{ij}^3},\qquad
+ S_s=\diag(s,1).
+\]
+We study the real solutions, for $s>1$, of
+\begin{equation}\label{eq:original}
+ f_i(q)=S_s q_i,\qquad i=1,\ldots,4.
+\end{equation}
+More generally, an $S_s$-balanced configuration satisfies
+$f_i(q)=\lambda S_s q_i$ for some $\lambda>0$; a unique positive dilation
+sets the multiplier to one. We count each solution of
+\eqref{eq:original} once as a labeled tuple in fixed coordinates, without
+identifying permutations, reflections, rotations or dilations.
+
+Balanced configurations describe relative equilibria in higher-dimensional
+Euclidean spaces; Albouy and Chenciner~\cite{AC} developed their
+mutual-distance formulation. At $s=1$, equation~\eqref{eq:original}
+is the central configuration equation. Hampton and Moeckel~\cite{HM}
+proved finiteness of planar four-body central configurations modulo
+similarities. For each fixed positive mass vector, Wang and
+Zhao~\cite{WZ} proved finiteness of planar four-body balanced
+configurations when the matrix has distinct eigenvalues sufficiently
+close to one another. In our normalization, their result concerns
+$s>1$ sufficiently close to one. We consider instead $s\to\infty$ and
+determine every solution for all sufficiently large $s$.
+
+Asselle, Fenucci and Portaluri~\cite[Theorem~4.7 and Section~5.2]{AFP}
+obtained lower bounds on the number of bifurcation parameters along
+collinear branches and numerically studied three-body branches,
+including large-$s$ limits. Asselle, Kormann and
+Testolina~\cite[Section~7]{AKT} followed planar four-body branches for
+four equal masses and for two pairs of equal masses, including branches
+extending to $s\to\infty$. Our result complements these numerical
+families with a classification of all solutions for arbitrary fixed
+positive masses, their nondegeneracy, and an exact count.
+
+Let
+\begin{equation}\label{eq:center-space}
+ M=\sum_{i=1}^4m_i,\qquad
+ W=\left\{q\in(\R^2)^4:\sum_i m_iq_i=0\right\},\qquad
+ \cR_s(q)_i=f_i(q)-S_s q_i.
+\end{equation}
+Pair cancellation gives $\sum_i m_if_i(q)=0$. Thus every solution lies
+in $W$, and $\cR_s$ maps the collision-free part of $W$ to $W$.
+A solution is \emph{nondegenerate} if, with $s$ fixed,
+$D\cR_s(q)|_W:W\to W$ is invertible. The space $W$ has dimension six.
+
+The limiting configurations are built from one-dimensional solutions.
+For positive masses $\mu_1,\ldots,\mu_n$, the normalized equations are
+\begin{equation}\label{eq:oned}
+ \sum_{j\ne i}\mu_j\frac{z_i-z_j}{|z_i-z_j|^3}=z_i,
+ \qquad \sum_i\mu_i z_i=0.
+\end{equation}
+For each prescribed order of the labels there is exactly one solution.
+This is the ordered form of Moulton's theorem~\cite{Moulton};
+Lemma~\ref{lem:ordered-oned} gives the convexity proof needed here.
+For a single mass, the solution is $z_1=0$.
+
+An \emph{ordered cluster datum} $\tau$ consists of an ordered partition
+$(B_1,\ldots,B_k)$ of $\{1,2,3,4\}$ into nonempty blocks and a strict
+linear order of the labels in each block. Write
+$M_a=\sum_{i\in B_a}m_i$. Its \emph{seed} consists of the solution
+$Y_1^0<\cdots<Y_k^0$ of \eqref{eq:oned} for the ordered block masses
+$M_1,\ldots,M_k$, together with the solution $(u_i^0)_{i\in B_a}$
+for the masses in each block in their prescribed order. A singleton
+block has $u_i^0=0$; for $k=1$, the outer coordinate is $Y_1^0=0$.
+
+\begin{theorem}\label{thm:main}
+For every fixed $m\in(0,\infty)^4$, there exists $s_0(m)>1$ such that,
+for every $s>s_0(m)$, the collision-free real solutions of
+\eqref{eq:original} are in bijection with the ordered cluster data.
+All solutions are nondegenerate on $W$. With labels and axes fixed and
+without a symmetry quotient, there are exactly $192$ solutions:
+$24$ on the $x$-axis, $24$ on the $y$-axis, and $144$ noncollinear solutions.
+
+For each datum, set $\eps=s^{-1/3}$. The corresponding solution is
+\begin{equation}\label{eq:branch}
+ q_i(\eps)=(\eps H_a(\eps),Y_a(\eps))
+                +\eps(u_i(\eps),v_i(\eps)),\qquad i\in B_a,
+\end{equation}
+where
+\begin{equation}\label{eq:constraints}
+ \sum_aM_aH_a=\sum_aM_aY_a=0,\qquad
+ \sum_{i\in B_a}m_iu_i=\sum_{i\in B_a}m_iv_i=0.
+\end{equation}
+All coordinates $(H,Y,u,v)$ extend real analytically through $\eps=0$,
+with value $(0,Y^0,u^0,0)$. In a fixed neighborhood of this seed in the
+space \eqref{eq:constraints}, they give the unique solution for every
+sufficiently small positive $\eps$.
+\end{theorem}
+
+Equal masses are allowed. The threshold depends on the fixed mass vector;
+no uniform threshold as a mass tends to zero is asserted.
+
+For comparison with the fixed-inertia normalization in \cite{AFP,AKT}, put
+\[
+ U(q)=\sum_{i<j}\frac{m_im_j}{r_{ij}},\qquad
+ I_s(q)=\sum_i m_i(sx_i^2+y_i^2).
+\]
+Pairing $f_i(q)=\lambda S_s q_i$ with $m_iq_i$ and summing gives
+$U(q)=\lambda I_s(q)$. Thus a configuration $\widehat q$ with
+$I_s(\widehat q)=1$ has multiplier $\lambda=U(\widehat q)$, and
+homogeneity gives the conversions
+\begin{equation}\label{eq:normalization}
+ q=\lambda^{1/3}\widehat q,\qquad
+ \widehat q=\frac{q}{\sqrt{I_s(q)}},\qquad
+ \lambda=I_s(q)^{3/2}.
+\end{equation}
+Here $q$ has multiplier one. Since the scale factors can vary with $s$,
+coordinate limits must be compared after this conversion.
+
+The proof rests on a uniform separation of distance scales. For constants
+$c_0,c_1,C>0$ depending only on the fixed masses, all solutions with $s\ge1$
+satisfy
+\[
+ r_{ij}\ge c_0s^{-1/3},\qquad
+ r_{ij}<Cs^{-1/3}\quad\hbox{or}\quad r_{ij}\ge c_1.
+\]
+Section~\ref{sec:estimates} proves this estimate by isolating a cluster
+and comparing its internal forces with the external field.
+Section~\ref{sec:limits} classifies subsequential limits of arbitrary
+solution sequences: the cluster centers form a vertical one-dimensional
+configuration, and each rescaled cluster is horizontal and
+one-dimensional. Section~\ref{sec:local} continues every seed by a
+single analytic construction and computes the six-dimensional
+linearization. Section~\ref{sec:global} proves that these local branches
+exhaust all solutions and are distinct, then counts them.
+
+\section{Uniform distance estimates}\label{sec:estimates}
+
+Write $\diam(x)=\max_i x_i-\min_i x_i$, and define $\diam(y)$ similarly.
+
+\begin{lemma}\label{lem:diameter}
+For positive masses and every $s>0$, any collision-free real solution
+of \eqref{eq:original} satisfies
+\begin{equation}\label{eq:diameter}
+ \diam(x)\le3(M/s)^{1/3},\qquad \diam(y)\le3M^{1/3}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Let $t_i$ denote either $x_i$ or $y_i$, and let $\lambda$ be its
+coefficient in $S_s$, namely $s$ or $1$. If the coordinate diameter is
+positive, choose a largest gap $g>0$ between consecutive ordered
+coordinates. The diameter is at most $3g$. Cut at this gap into a lower
+set $A$ and an upper set $B$, with total masses $M_A,M_B$ and weighted
+means $\overline t_A,\overline t_B$. The difference of the two
+mass-averaged equations is
+\[
+ \lambda(\overline t_B-\overline t_A)
+ =\left(\frac1{M_A}+\frac1{M_B}\right)
+   \sum_{i\in A,j\in B}m_im_j\frac{t_j-t_i}{r_{ij}^3}.
+\]
+For a cross pair, $r_{ij}\ge t_j-t_i\ge g$, so its force factor is
+at most $g^{-2}$. Also $\overline t_B-\overline t_A\ge g$.
+Thus $\lambda g\le M/g^2$, proving the claim. A zero coordinate
+diameter requires no estimate.
+\end{proof}
+
+\begin{proposition}\label{prop:scales}
+Set
+\begin{equation}\label{eq:scale-constants}
+ \begin{gathered}
+ m_0=\min_i m_i,\qquad T=(192M/m_0)^{1/3},\qquad G=(1+T)^2,\\
+ c_0=\frac{m_0^{1/3}}G,\qquad
+ c_1=\frac{(m_0/2)^{1/3}}G,\qquad C=6M^{1/3}.
+ \end{gathered}
+\end{equation}
+For every $s\ge1$, every collision-free real solution, and every
+$i\ne j$, with $\eps=s^{-1/3}$, one has
+\begin{equation}\label{eq:scales}
+ r_{ij}\ge c_0\eps,\qquad
+ r_{ij}<C\eps\quad\hbox{or}\quad r_{ij}\ge c_1.
+\end{equation}
+\end{proposition}
+\begin{proof}
+We first obtain two estimates for an isolated cluster. For a set $J$
+of at least two labels, write
+\[
+ m_J=\sum_{i\in J}m_i,\quad
+ c_J=\frac1{m_J}\sum_{i\in J}m_iq_i,\quad p_i=q_i-c_J,\quad
+ r=\diam\{q_i:i\in J\},
+\]
+\[
+ I_J=\sum_{i\in J}m_i|p_i|^2,\qquad
+ U_J=\sum_{\substack{i<j\\i,j\in J}}\frac{m_im_j}{r_{ij}}.
+\]
+If $J$ is proper, let $\delta$ be its distance from the complementary
+set of bodies and assume $r\le\delta/2$. The external field is
+\[
+ E_J(z)=\sum_{j\notin J}m_j\frac{z-q_j}{|z-q_j|^3}.
+\]
+Every point of the cluster's convex hull is within $r$ of each cluster
+point, so its distance from every exterior body is at least
+$\delta-r\ge\delta/2$.
+Since
+\begin{equation}\label{eq:force-derivative}
+ D\left(\frac z{|z|^3}\right)
+     =\frac{\Id}{|z|^3}-\frac{3zz^{\mathsf T}}{|z|^5},
+\end{equation}
+its operator norm is $2|z|^{-3}$. Integrating along segments in the
+convex hull shows that $E_J$ is Lipschitz there with constant
+\begin{equation}\label{eq:external-lipschitz}
+ L=\frac{16(M-m_J)}{\delta^3}.
+\end{equation}
+For the full cluster take $E_J=0$ and $L=0$; every estimate below
+then holds without a separation condition.
+
+Multiply the equation of body $i\in J$ by $m_ip_i$ and sum. Internal
+pairing and $\sum_{i\in J}m_ip_i=0$ give
+\[
+ U_J+\sum_{i\in J}m_ip_i\cdot E_J(q_i)
+       =\sum_{i\in J}m_ip_i\cdot S_s p_i\le sI_J.
+\]
+Subtracting $E_J(c_J)$ in the external sum bounds its absolute value
+by $LI_J$. Moreover,
+\[
+ m_JI_J=\sum_{\substack{i<j\\i,j\in J}}m_im_jr_{ij}^2,
+ \qquad U_J\ge\frac{m_JI_J}{r^3}.
+\]
+As $I_J>0$, it follows that
+\begin{equation}\label{eq:cluster-virial-bound}
+ m_J\le sr^3+Lr^3.
+\end{equation}
+
+For the second estimate, suppose that the vertical diameter $h$ of
+$J$ is positive. Put $\ell=|J|$ and cut its vertically ordered labels
+at a largest consecutive gap $g\ge h/(\ell-1)$. Let $A,B$ be the lower
+and upper groups, with masses $M_A,M_B$ and weighted vertical means
+$\overline y_A,\overline y_B$. Their mean difference is at most $h$.
+The difference of the two mean equations reads
+\[
+ \overline y_B-\overline y_A
+ =\left(\frac1{M_A}+\frac1{M_B}\right)
+  \sum_{i\in A,j\in B}m_im_j\frac{y_j-y_i}{r_{ij}^3}
+    +\overline E_{B,y}-\overline E_{A,y},
+\]
+where the bars on $E$ denote mass averages of the same field $E_J$.
+The internal term is at least $m_Jg/r^3$. The external difference
+is a convex combination of $E_J(q_j)-E_J(q_i)$ and has norm at most
+$Lr$. Hence
+\[
+ \frac{m_Jh}{(\ell-1)r^3}\le h+Lr.
+\]
+Using $\ell-1\le3$ gives
+\begin{equation}\label{eq:vertical-cluster-bound}
+ m_J\le3r^3+\frac{3Lr^4}{h}.
+\end{equation}
+
+To obtain the required separation, start with any prescribed pair at
+distance $d>0$. Stop if the current cluster is full or satisfies
+$\delta\ge Tr$. Otherwise adjoin an exterior body realizing
+$\delta<Tr$; its distance from every old body is at most
+$\delta+r<(1+T)r$. There are at most two additions. The final cluster
+therefore satisfies
+\begin{equation}\label{eq:cluster-selection}
+ d\le r\le Gd
+\end{equation}
+and is either full or has $\delta\ge Tr$. Since $T>2$, the preceding
+estimates apply. In both cases,
+\begin{equation}\label{eq:external-smallness}
+ Lr^3\le\frac{16M}{T^3}=\frac{m_0}{12}.
+\end{equation}
+
+Apply this construction to a closest pair, with distance $d_0$.
+Since $m_J\ge2m_0$, \eqref{eq:cluster-virial-bound} and
+\eqref{eq:external-smallness} yield
+\[
+ sr^3\ge 2m_0-\frac{m_0}{12}\ge m_0.
+\]
+Together with \eqref{eq:cluster-selection}, this gives
+$d_0\ge c_0\eps$.
+
+Next start with any pair satisfying $d\ge C\eps$. By
+\eqref{eq:diameter}, the horizontal diameter of the full configuration
+is at most $d/2\le r/2$. A pair attaining the final cluster diameter
+$r$ therefore has vertical separation at least $\sqrt3r/2$.
+In particular $h\ge r/2>0$. Equations
+\eqref{eq:vertical-cluster-bound} and \eqref{eq:external-smallness}
+now imply
+\[
+ m_J\le3r^3+6Lr^3\le3r^3+\frac{m_0}{2}.
+\]
+It follows that $r^3\ge m_0/2$, and \eqref{eq:cluster-selection} gives
+$d\ge c_1$. This proves the alternative in \eqref{eq:scales}.
+\end{proof}
+
+Thus, with the masses fixed, a pair distance tending to zero as
+$s\to\infty$ is bounded above and below by positive multiples of
+$s^{-1/3}$. This holds for every solution sequence, not only for sequences
+on a previously constructed branch.
+
+\section{Cluster limits}\label{sec:limits}
+
+We first prove the one-dimensional uniqueness and positivity used
+both to identify the limits and to continue them.
+
+\begin{lemma}\label{lem:ordered-oned}
+For a finite list of positive masses $\mu_1,\ldots,\mu_n$, set
+\[
+ V_\mu=\left\{z\in\R^n:\sum_i\mu_i z_i=0\right\}.
+\]
+Each chamber in $V_\mu$ defined by a strict order of the labels contains
+exactly one solution of \eqref{eq:oned}. At that solution the operator
+\begin{equation}\label{eq:laplacian}
+ (L_{\mu,z}h)_i=\sum_{j\ne i}\mu_j\frac{h_i-h_j}{|z_i-z_j|^3}
+\end{equation}
+preserves $V_\mu$ and is self-adjoint and positive definite there for
+the inner product $\langle h,t\rangle_\mu=\sum_i\mu_i h_it_i$.
+For $n=1$, the configuration and the centered space are both zero.
+\end{lemma}
+\begin{proof}
+For $n\ge2$, the chamber is nonempty and convex. On it consider
+\[
+ \Phi(z)=\sum_{i<j}\frac{\mu_i\mu_j}{|z_i-z_j|}
+                  +\frac12\sum_i\mu_i z_i^2.
+\]
+A sublevel $\Phi\le A$ is bounded, and every pair distance on it is
+at least $\mu_i\mu_j/A$. Thus nonempty sublevels are compact within
+the chamber, and a minimum exists. Direct differentiation gives
+\begin{equation}\label{eq:oned-hessian}
+ D^2\Phi(z)[h,h]=\sum_i\mu_i h_i^2
+       +2\sum_{i<j}\frac{\mu_i\mu_j(h_i-h_j)^2}{|z_i-z_j|^3}>0
+       \quad(h\ne0).
+\end{equation}
+Strict convexity yields a unique critical point. At such a point,
+$z_i-\sum_{j\ne i}\mu_j(z_i-z_j)/|z_i-z_j|^3$ is constant in $i$,
+because the first variation vanishes on $V_\mu$. Its mass-weighted
+sum is zero, so the constant is zero. This proves \eqref{eq:oned}.
+
+Pair cancellation shows that $L_{\mu,z}$ takes values in $V_\mu$.
+The identity
+\begin{equation}\label{eq:laplacian-form}
+ \langle h,L_{\mu,z}t\rangle_\mu
+   =\sum_{i<j}\frac{\mu_i\mu_j(h_i-h_j)(t_i-t_j)}{|z_i-z_j|^3}
+\end{equation}
+proves self-adjointness. For $t=h$, the right side vanishes only for
+constant $h$, and a constant vector in $V_\mu$ is zero. The singleton
+case has no equations and no nonzero vectors.
+\end{proof}
+
+We now classify limits of arbitrary solution sequences for the four
+fixed masses.
+
+\begin{proposition}\label{prop:seed-limits}
+Let $s_\nu\to\infty$ and let $q^\nu$ be collision-free real solutions
+of \eqref{eq:original}. Put $\eps_\nu=s_\nu^{-1/3}$. There are a
+subsequence and an ordered cluster datum with blocks $(B_1,\ldots,B_k)$
+such that,
+with
+\begin{equation}\label{eq:sequence-coordinates}
+ \begin{gathered}
+ c_a^\nu=\frac1{M_a}\sum_{i\in B_a}m_iq_i^\nu,\qquad
+ H_a^\nu=\frac{c_{a,x}^\nu}{\eps_\nu},\qquad
+ Y_a^\nu=c_{a,y}^\nu,\\
+ P_i^\nu=\frac{q_i^\nu-c_a^\nu}{\eps_\nu}
+          =(u_i^\nu,v_i^\nu),\qquad i\in B_a,
+ \end{gathered}
+\end{equation}
+one has
+\begin{equation}\label{eq:seed-limits}
+ H_a^\nu\longrightarrow0,\qquad
+ Y_a^\nu\longrightarrow Y_a^0,\qquad
+ P_i^\nu\longrightarrow(u_i^0,0).
+\end{equation}
+Here $(Y^0,u^0)$ is the seed of the datum, and
+$H_a^\nu=O(\eps_\nu^3)$. Within each block the pair distances are
+bounded above and below by positive multiples of $\eps_\nu$;
+between blocks they have positive limits.
+\end{proposition}
+\begin{proof}
+Centering and \eqref{eq:diameter} give
+\[
+ |x_i^\nu|\le3M^{1/3}\eps_\nu,\qquad
+ |y_i^\nu|\le3M^{1/3}.
+\]
+Pass to a subsequence on which every $y_i^\nu$ converges. Group labels
+having the same limit into blocks and order the distinct limits as
+$Y_1^0<\cdots<Y_k^0$. Within a block every pair distance tends to zero.
+The fixed positive lower alternative in \eqref{eq:scales} is therefore
+eventually excluded, and for all internal pairs simultaneously,
+\begin{equation}\label{eq:internal-bounds}
+ c_0\le\frac{r_{ij}^\nu}{\eps_\nu}<C.
+\end{equation}
+For a pair in different blocks the distance tends to
+$|Y_a^0-Y_b^0|>0$. When $k\ge2$, all cross distances are consequently
+bounded below by one fixed $\delta>0$ along the subsequence.
+
+For $i\in B_a$, the identity
+\[
+ P_i^\nu=\sum_{j\in B_a}\frac{m_j}{M_a}
+                 \frac{q_i^\nu-q_j^\nu}{\eps_\nu}
+\]
+gives $|P_i^\nu|\le C$; in a singleton block $P_i^\nu=0$.
+A further subsequence has limits $P_i^0=(u_i^0,v_i^0)$ satisfying
+\[
+ |P_i^0-P_j^0|\ge c_0\quad(i,j\in B_a,\ i\ne j),\qquad
+ \sum_{i\in B_a}m_iP_i^0=0.
+\]
+Thus the limiting internal configuration is collision-free.
+
+Let $E_i^\nu$ be the field on body $i$ due to bodies outside $B_a$,
+and let $\overline E_a^\nu$ be its mass average on $B_a$. Define
+\[
+ g_i(P)=\sum_{\substack{j\in B_a\\j\ne i}}
+                     m_j\frac{P_i-P_j}{|P_i-P_j|^3}.
+\]
+The block mean equation is
+$\overline E_a^\nu=S_{s_\nu}c_a^\nu$. Subtracting it from the equation
+of body $i$ and multiplying by $\eps_\nu^2$ gives the exact identity
+\begin{equation}\label{eq:scaled-internal}
+ g_i(P^\nu)+\eps_\nu^2(E_i^\nu-\overline E_a^\nu)
+              =(u_i^\nu,\eps_\nu^3v_i^\nu).
+\end{equation}
+For $k\ge2$, one has $|E_i^\nu|,|\overline E_a^\nu|\le M/\delta^2$
+and hence $|E_i^\nu-\overline E_a^\nu|\le2M/\delta^2$; for $k=1$
+all these terms vanish. The internal force is continuous at $P^0$
+by \eqref{eq:internal-bounds}, so \eqref{eq:scaled-internal} implies
+$g_i(P^0)=(u_i^0,0)$. Multiply the vertical equations by $m_iv_i^0$
+and sum within a block. Pairing terms yields
+\begin{equation}\label{eq:vertical-pairing}
+ 0=\sum_{\substack{i<j\\i,j\in B_a}}
+        \frac{m_im_j(v_i^0-v_j^0)^2}{|P_i^0-P_j^0|^3}.
+\end{equation}
+All coefficients are positive. Thus $v_i^0$ is constant within each
+block, and its weighted mean makes it zero. Internal separation now
+makes the $u_i^0$ distinct. Their horizontal equations are
+\eqref{eq:oned}, so Lemma~\ref{lem:ordered-oned} identifies the unique
+internal configuration in the resulting label order.
+
+The vertical mean equation passes to the limit because all cross
+pair distances stay positive. It gives
+\[
+ \sum_{b\ne a}M_b\frac{Y_a^0-Y_b^0}{|Y_a^0-Y_b^0|^3}=Y_a^0,
+ \qquad \sum_aM_aY_a^0=0.
+\]
+Lemma~\ref{lem:ordered-oned} identifies the outer seed. If $k=1$,
+total centering already gives $Y_1^\nu=0$.
+
+It remains to control the rescaled horizontal centers. For $k\ge2$,
+the horizontal diameter bound gives
+\[
+ |E_{i,x}^\nu|,\ |\overline E_{a,x}^\nu|
+          \le\frac{3M^{4/3}}{\delta^3}\eps_\nu.
+\]
+The horizontal mean equation is
+$\overline E_{a,x}^\nu=s_\nu c_{a,x}^\nu=\eps_\nu^{-2}H_a^\nu$.
+Consequently
+\begin{equation}\label{eq:horizontal-center}
+ H_a^\nu=\eps_\nu^2\overline E_{a,x}^\nu=O(\eps_\nu^3).
+\end{equation}
+For $k=1$, $H_1^\nu=0$ by total centering. All coordinates in
+\eqref{eq:sequence-coordinates} therefore converge as claimed.
+Singleton blocks have no internal variables, so the same proof includes
+$k=4$ and every mixed partition.
+\end{proof}
+
+\section{Analytic branches and nondegeneracy}\label{sec:local}
+
+Fix an ordered cluster datum with blocks $B_1,\ldots,B_k$. Define
+\[
+ V_0=\left\{t\in\R^k:\sum_aM_at_a=0\right\},\qquad
+ V_a=\left\{t\in\R^{B_a}:\sum_{i\in B_a}m_it_i=0\right\}.
+\]
+The coordinate space
+\begin{equation}\label{eq:blowup-space}
+ \cV=V_0\oplus V_0\oplus\bigoplus_{a=1}^k(V_a\oplus V_a)
+\end{equation}
+has coordinates $h=(H,Y,u,v)$ subject to \eqref{eq:constraints} and
+dimension
+\[
+ 2(k-1)+2\sum_a(|B_a|-1)=6.
+\]
+For $\eps>0$, the position map $Q_\eps:\cV\to W$ is
+\begin{equation}\label{eq:coordinates}
+ (Q_\eps h)_i=(\eps H_a,Y_a)+\eps(u_i,v_i),\qquad i\in B_a.
+\end{equation}
+It is a linear isomorphism. Its inverse takes the block means $c_a$
+and sets
+\[
+ H_a=c_{a,x}/\eps,\quad Y_a=c_{a,y},\quad
+ u_i=(x_i-c_{a,x})/\eps,\quad v_i=(y_i-c_{a,y})/\eps.
+\]
+For $k=1$, $V_0=\{0\}$; for a singleton block, $V_a=\{0\}$.
+
+\begin{proposition}\label{prop:local-branches}
+Each ordered cluster datum has a fixed open neighborhood $N$ of its
+seed $h^0=(0,Y^0,u^0,0)$ in $\cV$ and a number $\eta>0$ with the
+following properties. For $0<\eps<\eta$, exactly one solution of
+\eqref{eq:original}, with $s=\eps^{-3}$, is represented by $h\in N$.
+It is collision-free, its coordinates $h(\eps)$ extend real analytically
+to $|\eps|<\eta$ with $h(0)=h^0$, and its original residual derivative
+$D\cR_{\eps^{-3}}(Q_\eps h(\eps))|_W$ is invertible.
+\end{proposition}
+\begin{proof}
+For labels in the same block put
+\[
+ \rho_{ij}=\big((u_i-u_j)^2+(v_i-v_j)^2\big)^{1/2},\qquad
+ g_i=\sum_{\substack{j\in B_a\\j\ne i}}
+                   m_j\frac{(u_i-u_j,v_i-v_j)}{\rho_{ij}^3}.
+\]
+For labels in different blocks the physical difference is
+\begin{equation}\label{eq:cross-difference}
+ d_{ij}=(\eps(H_a-H_b+u_i-u_j),\,
+                    Y_a-Y_b+\eps(v_i-v_j)),\qquad i\in B_a,
+                    \ j\in B_b.
+\end{equation}
+Define
+\[
+ E_i=\sum_{j\notin B_a}m_j\frac{d_{ij}}{|d_{ij}|^3},\qquad
+ \overline E_a=\frac1{M_a}\sum_{i\in B_a}m_iE_i.
+\]
+At $(\eps,h)=(0,h^0)$ all $\rho_{ij}$ for internal pairs are positive,
+and all cross squared lengths equal $(Y_a^0-Y_b^0)^2>0$. On a product
+neighborhood of this point, their positive inverse three-halves powers
+are real analytic. Thus the displayed functions extend analytically
+across $\eps=0$. For negative $\eps$ this extension is only an auxiliary
+system; the physical internal distance is $|\eps|\rho_{ij}$.
+
+Define an analytic residual $F$ by
+\begin{align}
+ F^H_a&=\eps^2\overline E_{a,x}-H_a,&
+ F^Y_a&=\overline E_{a,y}-Y_a,\label{eq:outer-residual}\\
+ F^u_i&=g_{i,x}+\eps^2(E_{i,x}-\overline E_{a,x})-u_i,&
+ F^v_i&=g_{i,y}+\eps^2(E_{i,y}-\overline E_{a,y})-\eps^3v_i.
+ \label{eq:inner-residual}
+\end{align}
+Pair cancellation gives $\sum_aM_a\overline E_a=0$ and
+$\sum_{i\in B_a}m_ig_i=0$. The external deviations have zero block
+mean as well. Thus $F$ takes values in $\cV$, and the displayed
+components are six equations on the constrained space.
+
+For $b=(b_i)\in W$, let $\overline b_a$ be its block mass mean.
+Define $T_\eps:W\to\cV$ by
+\begin{equation}\label{eq:residual-transform}
+ \bigl(\eps^2\overline b_{a,x},\ \overline b_{a,y},\
+       \eps^2(b_{i,x}-\overline b_{a,x}),\
+       \eps^2(b_{i,y}-\overline b_{a,y})\bigr).
+\end{equation}
+This is a linear isomorphism for $\eps>0$: from an output
+$(\xi_a,\eta_a,\zeta_i,\theta_i)$ its inverse is
+\[
+ b_{i,x}=\eps^{-2}(\xi_a+\zeta_i),\qquad
+ b_{i,y}=\eta_a+\eps^{-2}\theta_i,\qquad i\in B_a.
+\]
+The constraints verify these block means and total centering.
+For $\eps>0$, internal force homogeneity and subtraction of block
+means give the exact identity
+\begin{equation}\label{eq:equivalence}
+ F(\eps,h)=T_\eps\,\cR_{\eps^{-3}}(Q_\eps h),\qquad \eps>0.
+\end{equation}
+In particular, the zeros of the two systems correspond in both directions.
+
+At $\eps=0$, the horizontal external field is zero and the vertical
+external field is independent of the internal coordinates. Writing
+\[
+ f_a^0(Y)=\sum_{b\ne a}M_b\frac{Y_a-Y_b}{|Y_a-Y_b|^3},
+\]
+we obtain
+\begin{equation}\label{eq:zero-residual}
+ F(0,h)=\bigl(-H,\ f^0(Y)-Y,\ (g_{i,x}-u_i)_i,\ (g_{i,y})_i\bigr).
+\end{equation}
+The seed $h^0$ is a zero. Let $L_0$ be the operator
+\eqref{eq:laplacian} on $V_0$ for the block masses
+$M_1,\ldots,M_k$ at $Y^0$, and let $L_a$ be the corresponding
+operator on $V_a$ for the internal seed of $B_a$.
+At a nonzero horizontal vector, \eqref{eq:force-derivative} is
+$|z|^{-3}\diag(-2,1)$, while
+$(t/|t|^3)'=-2|t|^{-3}$ for nonzero real $t$. Thus, grouping the
+coordinates according to \eqref{eq:blowup-space}, the entire derivative is
+\begin{equation}\label{eq:jacobian}
+ D_hF(0,h^0)=(-\Id)\oplus[-(\Id+2L_0)]
+       \oplus\bigoplus_{a=1}^k[-(\Id+2L_a)\oplus L_a].
+\end{equation}
+The external limit depends only on $Y$, and the internal mixed
+derivatives vanish at $v=0$, so no off-diagonal blocks occur.
+Lemma~\ref{lem:ordered-oned} makes every $L_a$ and $L_0$ positive
+definite on its nontrivial centered space. Hence all blocks in
+\eqref{eq:jacobian} are invertible; zero-dimensional factors contribute
+no kernel.
+
+The real analytic implicit function theorem supplies a product
+neighborhood $(-\eta,\eta)\times N$ whose zero set is the single
+analytic graph $h=h(\eps)$, with $h(0)=h^0$. Shrink this neighborhood
+to retain the positive scaled internal distances and cross distances.
+For positive $\eps$ the internal distances are $\eps\rho_{ij}>0$,
+so \eqref{eq:equivalence} gives the asserted collision-free solutions
+and uniqueness.
+
+Finally, reduce $\eta$ so that $D_hF(\eps,h(\eps))$ remains invertible.
+At each fixed positive $\eps$, differentiation of \eqref{eq:equivalence}
+at $h(\eps)$ gives
+\begin{equation}\label{eq:original-nondegeneracy}
+ D_hF(\eps,h(\eps))
+ =T_\eps\bigl(D\cR_{\eps^{-3}}(Q_\eps h(\eps))|_W\bigr)Q_\eps.
+\end{equation}
+Both outside factors are isomorphisms. Hence the original residual
+derivative on $W$ is invertible as well.
+\end{proof}
+
+\section{Global classification}\label{sec:global}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Let $\cD$ be the set of ordered cluster data. It is finite, since there
+are finitely many ordered partitions of four labels and finitely many
+orders within each block. Lemma~\ref{lem:ordered-oned} constructs each
+seed. Proposition~\ref{prop:local-branches} gives a fixed neighborhood
+$N_\tau$ and a branch $h_\tau(\eps)$ for each $\tau\in\cD$.
+Taking the minimum of their positive thresholds, choose $\eta_1>0$
+so that all these branches exist and are nondegenerate for
+$0<\eps<\eta_1$.
+
+We first prove that every solution is eventually represented in one
+of the $N_\tau$. Suppose otherwise. There would be a sequence
+$0<\eps_\nu<\min(\eta_1,1/\nu)$ and solutions $q^\nu$ represented
+in none of these neighborhoods. Proposition~\ref{prop:seed-limits}
+gives a subsequence and a datum $\tau$ such that all the coordinates
+of $q^\nu$ in the space belonging to $\tau$ converge to its seed.
+Since $N_\tau$ is a fixed open neighborhood of that seed, these
+coordinates eventually belong to $N_\tau$, a contradiction.
+There is therefore $\eta_2>0$, which we may take at most $\eta_1$,
+such that every solution with $0<\eps<\eta_2$ is represented in
+some $N_\tau$. Local uniqueness then identifies every such solution with a branch value.
+
+To distinguish the branches, let $\gamma>0$ be the smallest positive
+outer gap $Y_b^0-Y_a^0$, $a<b$, among all data with at least two blocks.
+This is the minimum of a finite nonempty set of positive numbers.
+
+Shorten all branches so that every outer gap is at least $\gamma/2$
+and every internal horizontal difference retains its prescribed sign.
+
+Choose $A\ge1$ bounding all $|u_i(\eps)|$ and $|v_i(\eps)|$ on these
+branches. Set $d=\gamma/8$ and shorten the common range further so that
+\[
+ 2\sqrt2 A\eps<d,\qquad 2A\eps<\gamma/4.
+\]
+Within a block, $|q_i-q_j|<d$. Between blocks $B_a,B_b$ with $a<b$,
+\[
+ y_j-y_i=Y_b-Y_a+\eps(v_j-v_i)>\gamma/4>d.
+\]
+Thus two distinct labels belong to the same block exactly when their
+distance is less than $d$. This recovers the blocks from the labeled
+configuration. The vertical separation recovers their order, and
+$x_j-x_i=\eps(u_j-u_i)$ recovers the internal label order. Consequently
+no two different data give the same labeled solution in this common
+parameter range.
+
+Choose $\eta\in(0,1)$ below all the preceding thresholds and set
+$s_0(m)=\eta^{-3}$. Coverage and unique recovery give the required
+bijection for every $s>s_0(m)$. Analyticity and fixed-neighborhood
+uniqueness follow from Proposition~\ref{prop:local-branches}. Every
+solution is nondegenerate on $W$ by that proposition and coverage.
+
+It remains to count the data. Concatenate the internally ordered
+labels, reading the blocks in outer order. This gives a permutation
+of four labels together with a cut at each of the three adjacent
+positions where a block ends. Conversely, a permutation and any
+choice of cuts give consecutive nonempty blocks with their internal
+orders. These constructions are inverse, so
+\[
+ |\cD|=4!\,2^3=192.
+\]
+More precisely, the number of data with $k$ blocks is
+$4!\binom{3}{k-1}$.
+
+For $k=1$, the configuration $q_i=(\eps u_i^0,0)$ is an exact solution:
+its force is $\eps^{-2}(u_i^0,0)=S_sq_i$. Its blown-up coordinates
+are constant, so local uniqueness identifies it with the corresponding
+branch. The $4!$ internal orders give $24$ solutions on the $x$-axis.
+For $k=4$, all internal coordinates vanish and $q_i=(0,Y_a^0)$ for
+$i\in B_a$ is an exact solution by the outer one-dimensional equations.
+The $4!$ ordered singleton partitions give $24$ solutions on the $y$-axis.
+
+Finally, any collinear solution has its containing affine line through
+the origin, because its mass center is zero. Write $q_i=t_i e$ for a
+unit direction $e$. The forces are parallel to $e$, and at least one
+$t_i$ is nonzero. Its equation forces $S_se$ to be parallel to $e$.
+As $s>1$, the line must be a coordinate axis. For $1<k<4$, there is a
+nonzero vertical difference between blocks and a nonzero horizontal
+difference within a nonsingleton block. Such a solution lies on neither
+axis and is therefore noncollinear. The number of noncollinear
+solutions is $192-24-24=144$.
+\end{proof}
+
+\begin{thebibliography}{9}
+
+\bibitem{AC}
+A.~Albouy and A.~Chenciner,
+\emph{Le probl\`eme des $n$ corps et les distances mutuelles},
+Invent. Math. \textbf{131} (1998), no.~1, 151--184.
+\href{https://doi.org/10.1007/s002220050200}{doi:10.1007/s002220050200}.
+
+\bibitem{AFP}
+L.~Asselle, M.~Fenucci and A.~Portaluri,
+\emph{Bifurcations of balanced configurations for the Newtonian $n$-body
+problem in $\R^4$},
+J. Fixed Point Theory Appl. \textbf{24} (2022), article~22.
+\href{https://doi.org/10.1007/s11784-022-00932-1}{doi:10.1007/s11784-022-00932-1}.
+
+\bibitem{AKT}
+L.~Asselle, K.~Kormann and G.~Testolina,
+\emph{Bifurcations of planar balanced configurations for the $n$-body
+problem in $\R^4$},
+preprint, version~2 (2026).
+\href{https://arxiv.org/abs/2510.17749v2}{arXiv:2510.17749v2}.
+
+\bibitem{HM}
+M.~Hampton and R.~Moeckel,
+\emph{Finiteness of relative equilibria of the four-body problem},
+Invent. Math. \textbf{163} (2006), no.~2, 289--312.
+\href{https://doi.org/10.1007/s00222-005-0461-0}{doi:10.1007/s00222-005-0461-0}.
+
+\bibitem{Moulton}
+F.~R.~Moulton,
+\emph{The straight line solutions of the problem of $n$ bodies},
+Ann. of Math. (2) \textbf{12} (1910), no.~1, 1--17.
+\href{https://doi.org/10.2307/2007159}{doi:10.2307/2007159}.
+
+\bibitem{WZ}
+Y.~Wang and L.~Zhao,
+\emph{On the finiteness issue of four-body balanced configurations in
+the plane},
+Regul. Chaotic Dyn. \textbf{31} (2026), no.~4, 560--590.
+\href{https://doi.org/10.1134/S1560354726510052}{doi:10.1134/S1560354726510052}.
+Preprint: \href{https://arxiv.org/abs/2412.17639v1}{arXiv:2412.17639v1}.
+
+\end{thebibliography}
+\end{document}
